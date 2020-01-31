@@ -44,19 +44,16 @@ class LinkedList:
 
   def reverse_list(self):
     current = self.head
-    reversing = 1
-    if current:
+    while (current) and (current.next_node):
+        next = current.next_node
+        current.next_node = next.next_node
         if current.next_node:
-            while reversing == 1:
-                next = current.next_node
-                current.next_node = next.next_node
-                if current.next_node:
-                    self.add_to_head(current.next_node.value)
-                else:
-                    reversing = 0
+            self.add_to_head(current.next_node.value)
+        else:
+            reversing = 0
 
-#--- tests ---
-
+# --- tests ---
+# 
 # ll = LinkedList()
 # ll.add_to_head(1)
 # ll.add_to_head(2)
