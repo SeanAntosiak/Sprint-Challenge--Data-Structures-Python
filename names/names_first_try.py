@@ -1,5 +1,7 @@
 import time
-from binary_search_tree import BinarySearchTree as bst
+from dll_stack import Stack
+from doubly_linked_list import DoublyLinkedList
+from linked_list import LinkedList
 
 start_time = time.time()
 
