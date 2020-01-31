@@ -1,5 +1,6 @@
 import time
 from binary_search_tree import BinarySearchTree as bst
+from doubly_linked_list import DoublyLinkedList as dll
 
 start_time = time.time()
 
@@ -11,31 +12,26 @@ f = open('names_2.txt', 'r')
 names_2 = f.read().split("\n")  # List containing 10000 names
 f.close()
 
-n1 = Stack()
-for name in names_1:
-    n1.push(name)
+n1 = bst(names_1[0])
+for name in names_1[1:]:
+    n1.insert(name)
 
-n2 = DoublyLinkedList()
+n2 = dll()
 for name in names_2:
     n2.add_to_tail(name)
 
-duplicates = LinkedList()
+duplicates = dll()
 
-while n1:
-    current_n1 = n1.pop()
-    current_n2 = n2.head
-    while current_n2:
-        if current_n1 == current_n2.value:
-            duplicates.add_to_head(current_n1)
-            break
-        else:
-            current_n2 = current_n2.next
-
-
-
+current = n2.head
+while current:
+    if n1.contains(current.value):
+        duplicates.add_to_tail(current.value)
+        current = current.next
+    else:
+        current = current.next
 
 end_time = time.time()
-print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
+print (f"{duplicates.length} duplicates")
 print (f"runtime: {end_time - start_time} seconds")
 
 # ---------- Stretch Goal -----------
@@ -50,6 +46,3 @@ print (f"runtime: {end_time - start_time} seconds")
 #     for name_2 in names_2:
 #         if name_1 == name_2:
 #             duplicates.append(name_1)
-
-
-n1.pop()
